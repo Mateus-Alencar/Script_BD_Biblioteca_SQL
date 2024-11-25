@@ -1,21 +1,15 @@
-# **Criação de Banco de Dados com PostgreSQL: Aprendizados e Exemplos**
+# Criação de Banco de Dados com PostgreSQL: Aprendizados e Exemplos
 
 Este repositório contém o código que desenvolvi durante um curso de criação de bancos de dados usando PostgreSQL. Aqui, compartilho os principais conceitos e técnicas que aprendi, desde os fundamentos de banco de dados até tópicos avançados, como normalização e álgebra relacional.
 
----
+## Conteúdo do Repositório
+- **Conceitos Básicos**
+- **Parte 1:** Banco de Dados de Pedidos
+- **Parte 2:** Tópicos Especiais
+- **Parte 3:** Álgebra Relacional
+- **Parte 4:** Projeto de Banco de Dados
 
-## **Conteúdo do Repositório**
-
-1. [Conceitos Básicos](#conceitos-básicos)
-2. [Parte 1: Banco de Dados de Pedidos](#parte-1-banco-de-dados-de-pedidos)
-3. [Parte 2: Tópicos Especiais](#parte-2-tópicos-especiais)
-4. [Parte 3: Álgebra Relacional](#parte-3-álgebra-relacional)
-5. [Parte 4: Projeto de Banco de Dados](#parte-4-projeto-de-banco-de-dados)
-6. [Script Biblioteca](#script-biblioteca)
-
----
-
-## **Conceitos Básicos**
+## Conceitos Básicos
 
 No início do curso, aprendi os conceitos fundamentais de bancos de dados:
 
@@ -23,16 +17,17 @@ No início do curso, aprendi os conceitos fundamentais de bancos de dados:
 - **Chaves Primárias:** Identificação única de registros em uma tabela.
 - **Chaves Estrangeiras:** Relacionamento entre tabelas.
 
-**Exemplo básico:**
+### Exemplo básico:
+
 ```sql
 CREATE TABLE clientes (
     cliente_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
-); 
+);
+```
 
-
-## **Parte 1: Banco de Dados de Pedidos**
+## Parte 1: Banco de Dados de Pedidos
 
 Nesta etapa, construí um banco de dados para gerenciar pedidos, aprendendo:
 
@@ -40,7 +35,9 @@ Nesta etapa, construí um banco de dados para gerenciar pedidos, aprendendo:
 - **Agrupamento:** Uso de `GROUP BY` para sumarizar informações.
 - **Views:** Criação de visualizações personalizadas.
 
-### **Exemplo de Join e Agrupamento:**
+### Exemplo de Join e Agrupamento:
+
+
 ```sql
 SELECT 
     clientes.nome,
@@ -48,8 +45,18 @@ SELECT
 FROM clientes
 LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
 GROUP BY clientes.nome;
+```
+### Exemplo de View:
+```sql
+CREATE VIEW pedidos_resumo AS
+SELECT 
+    cliente_id,
+    SUM(valor_total) AS total_gasto
+FROM pedidos
+GROUP BY cliente_id;
+```
 
-## **Parte 2: Tópicos Especiais**
+## Parte 2: Tópicos Especiais
 
 Técnicas avançadas para melhorar a funcionalidade do banco de dados:
 
@@ -59,8 +66,9 @@ Técnicas avançadas para melhorar a funcionalidade do banco de dados:
 - **Transações:** Garantia de consistência dos dados.
 - **Domínios:** Padronização de tipos de dados.
 - **Controle de Usuário:** Configuração de permissões.
+  
+### Exemplo de Trigger:
 
-### **Exemplo de Trigger:**
 ```sql
 CREATE OR REPLACE FUNCTION atualiza_estoque()
 RETURNS TRIGGER AS $$
@@ -76,9 +84,9 @@ CREATE TRIGGER trigger_estoque
 AFTER INSERT ON pedidos
 FOR EACH ROW
 EXECUTE FUNCTION atualiza_estoque();
+```
 
-
-## **Parte 3: Álgebra Relacional**
+## Parte 3: Álgebra Relacional
 
 Introdução aos fundamentos matemáticos de bancos de dados relacionais:
 
@@ -87,34 +95,37 @@ Introdução aos fundamentos matemáticos de bancos de dados relacionais:
 - **Junções e Combinações:** Relações entre tabelas.
 - **União e Interseção:** Operações para combinar conjuntos de dados.
 
-### **Exemplo prático:**
+### Exemplo prático:
+
 ```sql
 -- Seleção e projeção
 SELECT nome, email 
 FROM clientes
 WHERE cliente_id > 10;
+```
 
-
-## **Parte 4: Projeto de Banco de Dados**
+## Parte 4: Projeto de Banco de Dados
 
 A etapa final do curso envolveu o projeto e implementação de um banco de dados completo, aplicando:
 
 - **Álgebra Relacional:** Para construir consultas e normalizar dados.
 - **Formas Normais:** Normalização para evitar redundância e inconsistências.
 
-### **Exemplo de Normalização:**
+### Exemplo de Normalização:
 
 - **Forma 1:** Dados não atômicos.
 - **Forma 2:** Eliminação de dependências parciais.
 - **Forma 3:** Eliminação de dependências transitivas.
 
-#### **Tabela não normalizada:**
-```plaintext
-Clientes
---------------------------
-ID | Nome   | Pedido1 | Pedido2
-1  | João   | TV      | Geladeira
+#### Tabela não normalizada:
 
+**Clientes**
+| ID  | Nome   | Pedido1 | Pedido2 |
+| --- | ------ | ------- | ------- |
+| 1   | João   | TV      | Geladeira |
+
+#### Tabela normalizada:
+```sql
 CREATE TABLE clientes (
     cliente_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
@@ -125,16 +136,14 @@ CREATE TABLE pedidos (
     cliente_id INT REFERENCES clientes(cliente_id),
     produto VARCHAR(100)
 );
+```
 
-Script Biblioteca
+# Script Banco de Dados para Biblioteca
 
-Banco de Dados para Biblioteca
 Este repositório contém o script SQL completo utilizado para criar o banco de dados de uma biblioteca. O banco de dados foi projetado para gerenciar livros, autores, categorias, usuários e empréstimos, proporcionando uma estrutura organizada para o armazenamento e recuperação de informações essenciais para a operação de uma biblioteca.
 
-Funcionalidades
-Estrutura de Tabelas: Inclui tabelas para livros, autores, categorias, usuários e empréstimos.
-Relacionamentos: Implementa os relacionamentos necessários entre as tabelas (por exemplo, livros e autores, usuários e empréstimos).
-Consultas Básicas: O script inclui comandos SQL para realizar operações comuns como inserção, atualização, exclusão e busca de registros.
+## Funcionalidades
 
-
-
+- **Estrutura de Tabelas:** Inclui tabelas para livros, autores, categorias, usuários e empréstimos.
+- **Relacionamentos:** Implementa os relacionamentos necessários entre as tabelas (por exemplo, livros e autores, usuários e empréstimos).
+- **Consultas Básicas:** O script inclui comandos SQL para realizar operações comuns como inserção, atualização, exclusão e busca de registros.
