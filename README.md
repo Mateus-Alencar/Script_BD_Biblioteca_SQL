@@ -37,7 +37,6 @@ Nesta etapa, construí um banco de dados para gerenciar pedidos, aprendendo:
 
 ### Exemplo de Join e Agrupamento:
 
-
 ```sql
 SELECT 
     clientes.nome,
@@ -55,6 +54,40 @@ SELECT
 FROM pedidos
 GROUP BY cliente_id;
 ```
+
+# Joins em SQL
+
+**Joins** (ou junções) em SQL são usados para combinar dados de duas ou mais tabelas com base em uma condição de relacionamento entre elas. O tipo de join que você utiliza depende do que você quer incluir no resultado final. Existem vários tipos de joins, sendo os mais comuns:
+
+- **INNER JOIN**: Retorna apenas as linhas que têm correspondência em ambas as tabelas.
+- **LEFT JOIN (ou LEFT OUTER JOIN)**: Retorna todos os registros da tabela à esquerda, com as correspondências da tabela à direita. Se não houver correspondência, os valores da tabela à direita serão nulos.
+- **RIGHT JOIN (ou RIGHT OUTER JOIN)**: Retorna todos os registros da tabela à direita, com as correspondências da tabela à esquerda. Se não houver correspondência, os valores da tabela à esquerda serão nulos.
+- **FULL JOIN (ou FULL OUTER JOIN)**: Retorna todos os registros de ambas as tabelas, com valores nulos onde não houver correspondência.
+- **CROSS JOIN**: Retorna o produto cartesiano de ambas as tabelas, ou seja, combina todas as linhas de uma tabela com todas as linhas da outra.
+
+## Tabela Resumo dos Joins
+
+| Tipo de Join   | Retorna                                                           |
+|----------------|-------------------------------------------------------------------|
+| **INNER JOIN** | Apenas registros que têm correspondência em ambas as tabelas.     |
+| **LEFT JOIN**  | Todos os registros da tabela à esquerda, com correspondências da tabela à direita. |
+| **RIGHT JOIN** | Todos os registros da tabela à direita, com correspondências da tabela à esquerda. |
+| **FULL JOIN**  | Todos os registros de ambas as tabelas, com valores nulos onde não houver correspondência. |
+| **CROSS JOIN** | Produto cartesiano de ambas as tabelas.                           |
+
+## Exemplos de Joins
+
+### 1. **INNER JOIN**
+O **INNER JOIN** retorna apenas as linhas em que há uma correspondência em ambas as tabelas.
+
+**Exemplo:**
+
+```sql
+SELECT clientes.nome, pedidos.pedido_id
+FROM clientes
+INNER JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id;
+```
+
 
 ## Parte 2: Tópicos Especiais
 
@@ -86,6 +119,22 @@ FOR EACH ROW
 EXECUTE FUNCTION atualiza_estoque();
 ```
 
+### Controle de Usuário:
+
+```sql
+create role gerente;
+create role estagiario;
+
+grant select, insert, delete on bairro, cliente, complemento, fornecedor, municipio;
+
+grant all on all sequences in schema public to gerente;
+grant select on cliente_dados, dados_pedido to estagiario;
+
+create role maria login password '123' in role gerente;
+create role pedro login password '321' in role estagiario;
+```
+Esse código cria dois roles (gerente e estagiario), concede permissões específicas a essas funções e cria dois usuários (maria e pedro) com diferentes permissões de acesso, de acordo com suas funções.
+
 ## Parte 3: Álgebra Relacional
 
 Introdução aos fundamentos matemáticos de bancos de dados relacionais:
@@ -110,6 +159,8 @@ A etapa final do curso envolveu o projeto e implementação de um banco de dados
 
 - **Álgebra Relacional:** Para construir consultas e normalizar dados.
 - **Formas Normais:** Normalização para evitar redundância e inconsistências.
+
+[Modelo Conceitual - BD Biblioteca]([URL](https://app.brmodeloweb.com/#!/publicview/67448de373e29bfdd79fb099))
 
 ### Exemplo de Normalização:
 
