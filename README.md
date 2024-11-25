@@ -29,17 +29,19 @@ CREATE TABLE clientes (
     cliente_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL
-);
+); 
 
 
-Parte 1: Banco de Dados de Pedidos
+## **Parte 1: Banco de Dados de Pedidos**
+
 Nesta etapa, construí um banco de dados para gerenciar pedidos, aprendendo:
 
-Junções (Joins): Como conectar dados de várias tabelas.
-Agrupamento: Uso de GROUP BY para sumarizar informações.
-Views: Criação de visualizações personalizadas.
-Exemplo de Join e Agrupamento:
+- **Junções (Joins):** Como conectar dados de várias tabelas.
+- **Agrupamento:** Uso de `GROUP BY` para sumarizar informações.
+- **Views:** Criação de visualizações personalizadas.
 
+### **Exemplo de Join e Agrupamento:**
+```sql
 SELECT 
     clientes.nome,
     COUNT(pedidos.pedido_id) AS total_pedidos
@@ -47,27 +49,19 @@ FROM clientes
 LEFT JOIN pedidos ON clientes.cliente_id = pedidos.cliente_id
 GROUP BY clientes.nome;
 
-Exemplo de View:
-CREATE VIEW pedidos_resumo AS
-SELECT 
-    cliente_id,
-    SUM(valor_total) AS total_gasto
-FROM pedidos
-GROUP BY cliente_id;
+## **Parte 2: Tópicos Especiais**
 
-arte 2: Tópicos Especiais
 Técnicas avançadas para melhorar a funcionalidade do banco de dados:
 
-Funções: Automação de cálculos e lógica.
-Procedimentos Armazenados: Scripts executados diretamente no banco.
-Triggers: Ações automáticas em resposta a eventos.
-Transações: Garantia de consistência dos dados.
-Domínios: Padronização de tipos de dados.
-Controle de Usuário: Configuração de permissões.
-Exemplo de Trigger:
+- **Funções:** Automação de cálculos e lógica.
+- **Procedimentos Armazenados:** Scripts executados diretamente no banco.
+- **Triggers:** Ações automáticas em resposta a eventos.
+- **Transações:** Garantia de consistência dos dados.
+- **Domínios:** Padronização de tipos de dados.
+- **Controle de Usuário:** Configuração de permissões.
 
-sql
-Copy code
+### **Exemplo de Trigger:**
+```sql
 CREATE OR REPLACE FUNCTION atualiza_estoque()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -82,43 +76,45 @@ CREATE TRIGGER trigger_estoque
 AFTER INSERT ON pedidos
 FOR EACH ROW
 EXECUTE FUNCTION atualiza_estoque();
-Parte 3: Álgebra Relacional
+
+
+## **Parte 3: Álgebra Relacional**
+
 Introdução aos fundamentos matemáticos de bancos de dados relacionais:
 
-Seleção: Filtragem de linhas.
-Projeção: Seleção de colunas.
-Junções e Combinações: Relações entre tabelas.
-União e Interseção: Operações para combinar conjuntos de dados.
-Exemplo prático:
+- **Seleção:** Filtragem de linhas.
+- **Projeção:** Seleção de colunas.
+- **Junções e Combinações:** Relações entre tabelas.
+- **União e Interseção:** Operações para combinar conjuntos de dados.
 
-sql
-Copy code
+### **Exemplo prático:**
+```sql
 -- Seleção e projeção
 SELECT nome, email 
 FROM clientes
 WHERE cliente_id > 10;
-Parte 4: Projeto de Banco de Dados
+
+
+## **Parte 4: Projeto de Banco de Dados**
+
 A etapa final do curso envolveu o projeto e implementação de um banco de dados completo, aplicando:
 
-Álgebra Relacional: Para construir consultas e normalizar dados.
-Formas Normais: Normalização para evitar redundância e inconsistências.
-Exemplo de Normalização:
+- **Álgebra Relacional:** Para construir consultas e normalizar dados.
+- **Formas Normais:** Normalização para evitar redundância e inconsistências.
 
-Forma 1: Dados não atômicos.
-Forma 2: Eliminação de dependências parciais.
-Forma 3: Eliminação de dependências transitivas.
-Tabela não normalizada:
+### **Exemplo de Normalização:**
 
-plaintext
-Copy code
+- **Forma 1:** Dados não atômicos.
+- **Forma 2:** Eliminação de dependências parciais.
+- **Forma 3:** Eliminação de dependências transitivas.
+
+#### **Tabela não normalizada:**
+```plaintext
 Clientes
 --------------------------
 ID | Nome   | Pedido1 | Pedido2
 1  | João   | TV      | Geladeira
-Tabela normalizada:
 
-sql
-Copy code
 CREATE TABLE clientes (
     cliente_id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
