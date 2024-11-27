@@ -77,7 +77,7 @@ GROUP BY cliente_id;
 
 ## Exemplos de Joins
 
-### 1. **INNER JOIN**
+###  **INNER JOIN**
 O **INNER JOIN** retorna apenas as linhas em que há uma correspondência em ambas as tabelas.
 
 **Exemplo:**
@@ -162,6 +162,8 @@ A etapa final do curso envolveu o projeto e implementação de um banco de dados
 
 [Modelo Conceitual - BD Biblioteca]([URL](https://app.brmodeloweb.com/#!/publicview/67448de373e29bfdd79fb099))
 
+![Captura de tela 2024-11-25 091434](https://github.com/user-attachments/assets/8f94718f-b659-4a54-8e74-8dbbf4153e3e)
+
 ### Exemplo de Normalização:
 
 - **Forma 1:** Dados não atômicos.
@@ -172,6 +174,7 @@ A etapa final do curso envolveu o projeto e implementação de um banco de dados
 
 **Clientes**
 | ID  | Nome   | Pedido1 | Pedido2 |
+
 | --- | ------ | ------- | ------- |
 | 1   | João   | TV      | Geladeira |
 
