@@ -65,7 +65,7 @@ GROUP BY cliente_id;
 - **FULL JOIN (ou FULL OUTER JOIN)**: Retorna todos os registros de ambas as tabelas, com valores nulos onde não houver correspondência.
 - **CROSS JOIN**: Retorna o produto cartesiano de ambas as tabelas, ou seja, combina todas as linhas de uma tabela com todas as linhas da outra.
 
-## Tabela Resumo dos Joins
+## Tabela Resumo dos Joins.
 
 | Tipo de Join   | Retorna                                                           |
 |----------------|-------------------------------------------------------------------|
