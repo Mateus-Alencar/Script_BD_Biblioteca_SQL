@@ -1,4 +1,3 @@
-Novidade! Atalhos do teclado … Os atalhos de teclado do Drive foram atualizados para oferecer navegação por letras iniciais
 create table editora (
 	ideditora serial not null,
 	nome varchar(50) not null,
